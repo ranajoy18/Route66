@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extentreports>
+    <configuration>
+        <!-- Report Name -->
+        <reportName>Cucumber Test Execution Report</reportName>
+
+        <!-- Document Title -->
+        <documentTitle>Automation Report</documentTitle>
+
+        <!-- Theme Options: STANDARD or DARK -->
+        <theme>DARK</theme>
+
+        <!-- Timeline Chart -->
+        <timelineEnabled>true</timelineEnabled>
+
+        <!-- Custom Encoding -->
+        <encoding>UTF-8</encoding>
+    </configuration>
+</extentreports>
