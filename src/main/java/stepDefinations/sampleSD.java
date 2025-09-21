@@ -16,6 +16,7 @@ public class sampleSD {
 	}
 	@Given("Validate if the home page loads fine")
 	public void validate_if_the_home_page_loads_fine() {
+		homePage.validateTitleText();
 		homePage.clickSearch();
 	}
 
