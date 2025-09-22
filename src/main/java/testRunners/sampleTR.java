@@ -10,7 +10,6 @@ import org.testng.annotations.DataProvider;
 		plugin={"pretty",
 				"html:target/cucumber-reports.html",
 				"json:target/cucumebrJson",
-				"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
 				"rerun:target/failedScenarios.txt"
 				},
 		monochrome=false,

@@ -1,5 +1,5 @@
 @demo
-Feature: Sample feature to demonstrate
+Feature: Sample feature to demonstrate multi-scenario  parallel execution
 
   @tag1
   Scenario: RedBus homepage loads properly

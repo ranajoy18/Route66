@@ -5,11 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
-import com.aventstack.extentreports.markuputils.ExtentColor;
-import com.aventstack.extentreports.markuputils.MarkupHelper;
-
-import utils.hooks;
-
 public class HomePage extends BasePage{
 	
 	public HomePage(WebDriver driver) {
@@ -23,6 +18,8 @@ public class HomePage extends BasePage{
 	@FindBy(xpath="//h1[@data-autoid='headerText']")
 	private WebElement titleTextBox;
 	
+	@FindBy(xpath="//div[@style='--timer-dur: 5;']/div/div")
+	private WebElement errorToastMessage;
 	
 	public void launchHomePage() {
 		open("");
@@ -30,6 +27,19 @@ public class HomePage extends BasePage{
 	
 	public void clickSearch() {
 		searchBox.click();
+	}
+	
+	public void validateErrorMessage() {
+		
+		getWaitForVisibility(errorToastMessage);
+		
+		String expectedErrorToastMessageText="Please enter source and destination";
+		String errorToastMessageTextFromUI=errorToastMessage.getText();
+		
+		System.out.println("errorToastMessage - "+errorToastMessageTextFromUI);
+		
+		Assert.assertEquals(errorToastMessageTextFromUI, expectedErrorToastMessageText);
+		
 	}
 
 	public void validateTitleText() {
@@ -40,7 +50,6 @@ public class HomePage extends BasePage{
 		String titleBoxTextFromUI=titleTextBox.getText();
 		
 		System.out.println("titleBoxTextFromUI - "+titleBoxTextFromUI);
-		hooks.getTest().info(MarkupHelper.createLabel("titleBoxTextFromUI = " + titleBoxTextFromUI, ExtentColor.BLUE));
 		
 		Assert.assertEquals(titleBoxTextFromUI, expectedTitleBoxText);
 	}
