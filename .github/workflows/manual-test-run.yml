@@ -1,0 +1,47 @@
+name: Manual Test Run
+
+on:
+  workflow_dispatch:
+    inputs:
+      browser:
+        description: "Optional browser to run tests against"
+        required: false
+        default: "chrome"
+      tags:
+        description: "Optional TestNG groups or Cucumber tags"
+        required: false
+        default: ""
+
+jobs:
+  run-tests:
+    name: Run Automated Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+
+      - name: Run tests
+        env:
+          BROWSER: ${{ github.event.inputs.browser }}
+          TEST_TAGS: ${{ github.event.inputs.tags }}
+        run: |
+          mvn -B test
+
+      - name: Archive test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: |
+            extent-report.html
+            test-output/**
+            target/surefire-reports/**
+          if-no-files-found: ignore
