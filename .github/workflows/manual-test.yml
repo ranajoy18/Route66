@@ -1,0 +1,46 @@
+name: Manual Test Run
+
+on:
+  workflow_dispatch:
+    inputs:
+      maven_goals:
+        description: "Maven goals to run"
+        required: false
+        default: "test"
+
+jobs:
+  run-tests:
+    name: Run Maven Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Run Maven
+        run: mvn --batch-mode ${{ inputs.maven_goals }}
+
+      - name: Archive Surefire Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: target/surefire-reports
+          if-no-files-found: warn
+
+      - name: Archive Extent Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: extent-report
+          path: |
+            extent-report.html
+            target/extent-report.html
+          if-no-files-found: warn
