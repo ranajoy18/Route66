@@ -55,11 +55,39 @@
 	</dependency>
 	
 	<!-- TestConfig management purpose -->
-	<dependency>
+        <dependency>
     <groupId>org.aeonbits.owner</groupId>
     <artifactId>owner</artifactId>
     <version>1.0.12</version>
-	</dependency>
-	
+        </dependency>
+
+        <!-- Lombok for Owner dependency (annotation processing) -->
+        <dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.18.36</version>
+    <scope>provided</scope>
+        </dependency>
+
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>17</release>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>1.18.36</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
