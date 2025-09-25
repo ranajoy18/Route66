@@ -3,9 +3,10 @@
 <suite name="RedBusSuite" parallel="methods" thread-count="4">
 
     <test name="RedBusTests">
-        <classes>
-            <class name="testRunners.SampleTRTest" />
-        </classes>
+        <packages>
+            <!-- Change this to match your actual test package -->
+            <package name="com.redbus.tests" />
+        </packages>
     </test>
 
 </suite>
